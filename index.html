@@ -1,0 +1,38 @@
+<html>
+    <style>
+    </style>
+    <script src="./js/core/three.js"></script>
+    <script src="./js/core/OrbitControls.js"></script>
+    <script src="./js/atom.js"></script>
+    <script>
+        window.onload = function() {
+            let gold = new Atom(79, 2, 8, 18, 32, 18, 1, 0,);
+
+            let scene = new THREE.Scene();
+            let camera = new THREE.PerspectiveCamera( 60, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+            let renderer = new THREE.WebGLRenderer();
+            let canvas=document.getElementById("animationCanvas"); 
+            // console.log(canvas.width());
+            renderer.setSize( canvas.offsetWidth, canvas.offsetHeight );
+            canvas.appendChild( renderer.domElement );         
+
+            scene.add( gold.secondModel().group  );
+            scene.add( gold.secondModel().nucleus  );
+
+            camera.position.z = 5;
+
+            let controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+            let animate = function () {
+                requestAnimationFrame( animate );
+                renderer.render( scene, camera );
+            };
+
+            animate();
+        }
+    </script>
+    <body>
+        <div style="width: 80%; height : 80%; float: right;" id="animationCanvas"></div>
+    </body>
+</html>
