@@ -5,4 +5,61 @@
     <script src="/static/js/lib/TrackballControls.js"></script>
     <script src="/static/js/lib/CSS3DRenderer.js"></script>
     <script src="/static/js/lattice.js"></script>
+    <span id="lattice-structure" data-structure="{{structure}}"></span>
+    <script>
+        var camera, scene, renderer;
+        var controls;
+        init();
+        animate();
+
+        function init() {
+            camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+            camera.position.z = 15;
+            scene = new THREE.Scene();
+
+            let structure = document.getElementById('lattice-structure').getAttribute('data-structure');
+
+            var latticeShape;
+            if (structure == 'triclinic') {
+                latticeShape = new Triclinic(2, 0.6)
+            } else if (structure == 'monoclinic') {
+                latticeShape = new Monoclinic(2, 0.6);
+            } else if (structure == 'orthorhombic') {
+                latticeShape = new Orthorhombic(2, 0.6)
+            } else if (structure == 'tetragonal') {
+                latticeShape = new Tetragonal(2, 0.6)
+            } else if (structure == 'rhombohedral') {
+                latticeShape = new Rhombohedral(2, 0.6)
+            } else if (structure == 'hexagonal') {
+                latticeShape = new Hexagonal(2, 0.6)
+            } else if (structure == 'cubic') {
+                latticeShape = new Cubic(2, 0.6)
+            }
+
+            scene.add(latticeShape.shape);
+
+            var light = new THREE.DirectionalLight( 'white' );
+            light.position.set( 0, 1, 1 ).normalize();
+            scene.add(light);
+
+            var backLight = new THREE.DirectionalLight( 'white' );
+            backLight.position.set( 0, 1, -10 ).normalize();
+            scene.add(backLight);
+
+            renderer = new THREE.WebGLRenderer();
+            let canvas = document.getElementById("animationCanvas");
+            renderer.setSize( canvas.offsetWidth, canvas.offsetHeight );
+            canvas.appendChild( renderer.domElement );
+
+            controls = new THREE.TrackballControls( camera, renderer.domElement );
+            controls.minDistance = 15;
+        }
+
+        function animate() {
+            requestAnimationFrame( animate );
+            controls.update();
+            renderer.render( scene, camera );
+        }
+
+    </script>
 {% endblock %}
