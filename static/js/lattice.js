@@ -50,7 +50,7 @@ function getLine(pointX, pointY) {
     var l = new THREE.Geometry() ;
     l.vertices.push(new THREE.Vector3(pointX[0], pointX[1], pointX[2])) ;
     l.vertices.push(new THREE.Vector3(pointY[0], pointY[1], pointY[2])) ;
-    var lMesh = new THREE.Line(l, new THREE.LineBasicMaterial({color:'red', linewidth : 3})) ;
+    var lMesh = new THREE.Line(l, new THREE.LineBasicMaterial({color:'white', linewidth : 3})) ;
     return lMesh ;
 }
 function Hexagonal(edgeLength, nodeRadius) {

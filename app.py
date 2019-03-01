@@ -14,5 +14,9 @@ def ptable():
 def lattice_structure(structure):
     return render_template('lattice_structure.html', structure=structure)
 
+@app.route('/geometry/<model>')
+def geometric_model(model):
+    return render_template('geometric_model.html', model=model)
+
 if __name__ == '__main__':
     app.run(debug=True)
