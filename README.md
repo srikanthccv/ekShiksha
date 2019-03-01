@@ -1,6 +1,6 @@
 ## App-URL
 
-Coming soon!
+https://salty-shore-25549.herokuapp.com/
 
 ## Prerequisites
 
