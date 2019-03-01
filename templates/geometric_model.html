@@ -4,8 +4,8 @@
     <script src="/static/js/lib/tween.min.js"></script>
     <script src="/static/js/lib/TrackballControls.js"></script>
     <script src="/static/js/lib/CSS3DRenderer.js"></script>
-    <script src="/static/js/lattice.js"></script>
-    <span id="lattice-structure" data-structure="{{structure}}"></span>
+    <script src="/static/js/geometry.js"></script>
+    <span id="geometric-model" data-model="{{model}}"></span>
     <script>
         var camera, scene, renderer;
         var controls;
@@ -17,26 +17,24 @@
             camera.position.z = 15;
             scene = new THREE.Scene();
 
-            let structure = document.getElementById('lattice-structure').getAttribute('data-structure');
+            let model = document.getElementById('geometric-model').getAttribute('data-model');
 
-            var latticeShape;
-            if (structure == 'triclinic') {
-                latticeShape = new Triclinic(2, 0.6)
-            } else if (structure == 'monoclinic') {
-                latticeShape = new Monoclinic(2, 0.6);
-            } else if (structure == 'orthorhombic') {
-                latticeShape = new Orthorhombic(2, 0.6)
-            } else if (structure == 'tetragonal') {
-                latticeShape = new Tetragonal(2, 0.6)
-            } else if (structure == 'rhombohedral') {
-                latticeShape = new Rhombohedral(2, 0.6)
-            } else if (structure == 'hexagonal') {
-                latticeShape = new Hexagonal(2, 0.6)
-            } else if (structure == 'cubic') {
-                latticeShape = new Cubic(2, 0.6)
+            var geometricModel;
+            if (model == 'linear') {
+                geometricModel = new Linear(0.4, 0.6)
+            } else if (model == 'tetrahedral') {
+                geometricModel = new Tetrahedral(0.4, 0.6, 0);
+            } else if (model == 'octahedral') {
+                geometricModel = new Octahedral(0.4, 0.6, 0)
+            } else if (model == 'trigonal-planar') {
+                geometricModel = new TrigonalPlanar(0.4, 0.6, 0)
+            } else if (model == 'trigonal-bipyramidal') {
+                geometricModel = new TrigonalBipyramidal(0.4, 0.6, 0)
+            } else if (model == 'pentagonal-bipyramidal') {
+                geometricModel = new PentagonalBipyramidal(0.4, 0.6, 0)
             }
 
-            scene.add(latticeShape.shape);
+            scene.add(geometricModel.shape);
 
             var light = new THREE.DirectionalLight( 'white' );
             light.position.set( 0, 1, 1 ).normalize();
@@ -52,7 +50,7 @@
             canvas.appendChild( renderer.domElement );
 
             controls = new THREE.TrackballControls( camera, renderer.domElement );
-            controls.minDistance = 15;
+            // controls.maxDistance = 20;
         }
 
         function animate() {
