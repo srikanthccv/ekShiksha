@@ -1,6 +1,6 @@
 ## App-URL
 
-This application is currently hosted at http://chemistry.codebank.org.in/ (this is not functional anymore. I will update it real soon.)
+Coming soon!
 
 ## Prerequisites
 
