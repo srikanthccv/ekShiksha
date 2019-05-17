@@ -22,18 +22,37 @@ app.set('view engine', 'html');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/atom/:atomic_number', function(request, response) {
-    let atomic_number = request.params.atomic_number;
+app.get('/atoms', function(request, response) {
+    db.all('SELECT * from Element', function(err, rows) {
+        var data = JSON.stringify(rows);
+        var status = "success";
+        var message = "ok";
+        if (err) {
+            console.log(err.message);
+            status = "error";
+            message = err.message;
+        }
+        response.send({"status": status, "message": message, "data": data});
+    });
+});
+
+app.get('/atoms/:atomic_number', function(request, response) {
+    var atomic_number = request.params.atomic_number;
     sql = `SELECT * FROM Element WHERE atomic_number = ?`;
     db.get(sql, [atomic_number], function(err, row) {
+        var data = JSON.stringify(row);
+        var status = "success";
+        var message = "ok";
+        if (!row) {
+            status = "error";
+            message = "No data exists!";
+        }
         if (err) {
             console.error(err.message);
-            response.json({"status": "error", "message": "Something is blown up!"});
-        } else if (!row) {
-            response.json({"status": "error", "message": "No data exists"});
-        } else {
-            response.json({"status": "success", "data": JSON.stringify(row)});
+            status = "error";
+            message = err.message ;
         }
+        response.send({"status": status, "message": message, "data": data});
     });
 });
 
