@@ -66,4 +66,8 @@ app.get('/', function(request, response) {
     response.render('index');
 });
 
+app.get('/atomic-structure', function(request, response) {
+    response.render('atomic_structure');
+});
+
 app.listen(port, () => console.log(`App listening on port ${port}!`));
