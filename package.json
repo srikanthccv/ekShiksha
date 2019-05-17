@@ -1,0 +1,25 @@
+{
+  "name": "chemistry-animations",
+  "version": "0.0.1",
+  "description": "Some science animations written in JavaScript.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "sqlite3": "^4.0.0"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": "https://github.com/lonewolf3739/chemistry-animations"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}
