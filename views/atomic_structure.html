@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Welcome to ekShiksha!</title>
+    <title>Periodic Table</title>
     <meta name="description" content="A cool thing made with Glitch">
     <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css'>
+    <style>
+      body,html{height:100%}body{background-color:#000;margin:0;font-family:Helvetica,sans-serif;overflow:hidden}a{color:#fff}#info{position:absolute;width:100%;color:#fff;padding:5px;font-family:Monospace;font-size:13px;font-weight:700;text-align:center;z-index:1}#menu{position:absolute;bottom:20px;width:100%;text-align:center}.element{width:120px;height:160px;box-shadow:0 0 12px rgba(0,255,255,.5);border:1px solid rgba(127,255,255,.25);text-align:center;cursor:default}.element:hover{box-shadow:0 0 12px rgba(0,255,255,.75);border:1px solid rgba(127,255,255,.75)}.element .number{position:absolute;top:20px;right:20px;font-size:12px;color:rgba(127,255,255,.75)}.element .symbol{position:absolute;top:40px;left:0;right:0;font-size:60px;font-weight:700;color:rgba(255,255,255,.75);text-shadow:0 0 10px rgba(0,255,255,.95)}.element .details{position:absolute;bottom:15px;left:0;right:0;font-size:12px;color:rgba(127,255,255,.75)}button{color:rgba(127,255,255,.75);background:0 0;outline:1px solid rgba(127,255,255,.75);border:0;padding:5px 10px;cursor:pointer}button:hover{background-color:rgba(0,255,255,.5)}button:active{color:#000;background-color:rgba(0,255,255,.75)}
+    </style>
 
+    <link rel="stylesheet" href="/styles/main.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.min.js"></script>
     <script src="/js/lib/tween.min.js"></script>
     <script src="/js/lib/TrackballControls.js"></script>
@@ -21,6 +24,13 @@
   </head>
   <body>
     <main>
+      <div id="container"></div>
+      <div id="menu">
+        <button id="table">TABLE</button>
+        <button id="sphere">SPHERE</button>
+        <button id="helix">HELIX</button>
+        <button id="grid">GRID</button>
+      </div>
       <script src="/js/client/atomic_structure.js" defer></script>
     </main>
   </body>
