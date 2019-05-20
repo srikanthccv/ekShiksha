@@ -13,6 +13,8 @@ const dbFile = './data.sqlite';
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(dbFile);
 
+const atomic_structure = require('./routes/atomic-structure');
+
 // set templating engine
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', new swig.Swig().renderFile);
@@ -66,8 +68,6 @@ app.get('/', function(request, response) {
     response.render('index');
 });
 
-app.get('/atomic-structure', function(request, response) {
-    response.render('atomic_structure');
-});
+app.use('/atomic-structure', atomic_structure);
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
