@@ -6,7 +6,7 @@ function Shell(r, noOfElectrons, orbitColor) {
 	this.noOfElectrons = noOfElectrons ;
 	
 	var orbit = new THREE.Group();
-	var geometry = new THREE.CircleGeometry(this.radius, 100);
+	var geometry = new THREE.CircleGeometry(this.radius, 1010);
 	var angle = (2*Math.PI)/noOfElectrons ;
 	geometry.vertices.shift();
 	
@@ -119,8 +119,6 @@ function secondModel() {
 	} ;	
 }
 function thirdModel() {
-            console.log("Hey there");
-
 	var noOfElectrons = this.atomicNumber ;
 	var group = new THREE.Group() , i = 1, r = 0.9;
 	var nucleus = new THREE.Mesh(
