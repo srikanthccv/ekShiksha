@@ -1,6 +1,6 @@
 const topicsList = document.getElementById('topics');
 const topicsLink = {
-    1 : "/atomic-structure",
+    1 : "/periodic-table",
     2 : "/chemical-bonding",
     3 : "/solid-state",
     4 : "/chemical-reactions",
