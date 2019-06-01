@@ -13,7 +13,7 @@ const dbFile = './data.sqlite';
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database(dbFile);
 
-const atomic_structure = require('./routes/atomic-structure');
+const periodic_table = require('./routes/periodic-table');
 
 // set templating engine
 app.set('views', path.join(__dirname, 'views'));
@@ -68,6 +68,6 @@ app.get('/', function(request, response) {
     response.render('index');
 });
 
-app.use('/atomic-structure', atomic_structure);
+app.use('/periodic-table', periodic_table);
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
