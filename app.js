@@ -68,6 +68,15 @@ app.get('/', function(request, response) {
     response.render('index');
 });
 
+app.get('/organic-reactions', function(request, response) {
+    response.render('organic_reactions');
+});
+
+app.get('/hybridization/:type', function(request, response) {
+    let type = request.params.type;
+    response.render('hybridization', {type: type});
+});
+
 app.use('/periodic-table', periodic_table);
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
