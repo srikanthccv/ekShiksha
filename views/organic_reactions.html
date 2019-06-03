@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Organic Reactions</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+      body,html{height:100%}body{background-color:#000;margin:0;font-family:Helvetica,sans-serif;overflow:hidden}
+    </style>
+
+    <link rel="stylesheet" href="/styles/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.min.js"></script>
+    <script src="/js/lib/tween.min.js"></script>
+    <script src="/js/lib/TrackballControls.js"></script>
+    <script src="/js/lib/CSS3DRenderer.js"></script>
+    <script src="/js/lib/OrbitControls.js"></script>
+
+    <!-- import the webpage's client-side javascript file -->
+    <script src="/js/client/organic_reactions.js"></script>
+  </head>
+  <body>
+    <script>
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+      var points = [
+        [0, 1, 1],
+        [0, -1, -1],
+        [0, 1, -1],
+        [0, -1, 1]
+      ];
+      points.forEach((elem, index) => {
+        console.log(elem);
+        var light = new THREE.DirectionalLight( 0xffffff );
+        light.position.set( elem[0], elem[1], elem[2] ).normalize();
+        scene.add(light);
+      })
+
+
+
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize( window.innerWidth, window.innerHeight );
+      document.body.appendChild( renderer.domElement );
+      
+      var controls = new THREE.TrackballControls( camera, renderer.domElement );
+      controls.rotateSpeed = 0.5;
+      controls.minDistance = 1;
+      controls.maxDistance = 8;
+
+
+      camera.position.z = 6;
+      // camera.position.x = 6;
+      showSN2();
+      var animate = function () {
+        requestAnimationFrame( animate );
+        controls.update();
+        renderer.render( scene, camera );
+      };
+      
+      animate();
+    </script>
+  </body>
+</html>
