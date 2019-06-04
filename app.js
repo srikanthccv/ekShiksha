@@ -73,8 +73,23 @@ app.get('/organic-reactions', function(request, response) {
 });
 
 app.get('/hybridization/:type', function(request, response) {
-    let type = request.params.type;
+    var type = request.params.type;
     response.render('hybridization', {type: type});
+});
+
+app.get('/chemical-reactions/:type', function(request, response) {
+    var type = request.params.type;
+    response.render('chemical_reactions', {type: type});
+});
+
+app.get('/solid-state/:type', function(request, response) {
+    var type = request.params.type;
+    response.render('solid_state', {type: type});
+});
+
+app.get('/geometry/:type', function(request, response) {
+    var type = request.params.type;
+    response.render('geometry', {type: type});
 });
 
 app.use('/periodic-table', periodic_table);
