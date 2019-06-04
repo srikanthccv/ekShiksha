@@ -1,7 +1,7 @@
 const topicsList = document.getElementById('topics');
 const topicsLink = {
     1 : "/periodic-table",
-    2 : "/chemical-bonding",
+    2 : "/geometry",
     3 : "/solid-state",
     4 : "/chemical-reactions",
     5 : "/hybridization",
