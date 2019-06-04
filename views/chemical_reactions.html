@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Chemical Reactions</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+      body,html{height:100%}body{background-color:#000;margin:0;font-family:Helvetica,sans-serif;overflow:hidden}
+    </style>
+
+    <link rel="stylesheet" href="/styles/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.min.js"></script>
+    <script src="/js/lib/tween.min.js"></script>
+    <script src="/js/lib/TrackballControls.js"></script>
+    <script src="/js/lib/CSS3DRenderer.js"></script>
+    <script src="/js/lib/OrbitControls.js"></script>
+
+    <!-- import the webpage's client-side javascript file -->
+    <script src="/js/client/reaction.js"></script>
+  </head>
+  <body>
+    <main>
+      <span id="type" data-type="{{ type }}"></span>
+      <select id="reaction">
+        <option value="combination">Combination</option>
+        <option value="decomposition">Decomposition</option>
+        <option value="single-displacement">Single Displacement</option>
+        <option value="double-displacement">Double Displacement</option>
+      </select>
+      <script>
+        let type = document.getElementById("type").getAttribute('data-type');
+        document.getElementById('reaction').value = type;
+
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+        var light = new THREE.AmbientLight( 0xffffff ); // white light
+	      scene.add( light );	
+
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        document.body.appendChild( renderer.domElement );
+        
+        var controls = new THREE.TrackballControls( camera, renderer.domElement );
+        controls.rotateSpeed = 0.5;
+        controls.minDistance = 1;
+        controls.maxDistance = 8;
+        
+        switch(type) {
+          case 'combination':
+            Combination();
+            break;
+          case 'decomposition':
+            Decomposition();
+            break;
+          case 'single-displacement':
+            SingleDisplacement();
+            break;
+          case 'double-displacement':
+            DoubleDisplacement();
+            break;
+        }
+
+        camera.position.z = 10;
+        var animate = function () {
+          requestAnimationFrame( animate );
+          controls.update();
+          renderer.render( scene, camera );
+        };
+        
+        animate();
+
+        document.getElementById("reaction").addEventListener('change', function() {
+          let type = this.options[this.selectedIndex].value;
+          window.location.href = "/chemical-reactions/" + type;
+        });
+      </script>  
+    </main>
+  </body>
+</html>

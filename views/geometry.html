@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Chemical Bonding - Geometric Structures</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+      body,html{height:100%}body{background-color:#000;margin:0;font-family:Helvetica,sans-serif;overflow:hidden}
+    </style>
+
+    <link rel="stylesheet" href="/styles/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.min.js"></script>
+    <script src="/js/lib/tween.min.js"></script>
+    <script src="/js/lib/TrackballControls.js"></script>
+    <script src="/js/lib/CSS3DRenderer.js"></script>
+    <script src="/js/lib/OrbitControls.js"></script>
+
+    <!-- import the webpage's client-side javascript file -->
+    <script src="/js/client/geometry.js"></script>
+  </head>
+  <body>
+    <main>
+      <span id="type" data-type="{{ type }}"></span>
+      <select id="geometry">
+        <option value="linear">Linear</option>
+        <option value="octahedral">Octahedral</option>
+        <option value="pentagonalbipyramidal">Pentagonal Bipyramidal</option>
+        <option value="tetrahedral">Tetrahedral</option>
+        <option value="trigonalbipyramidal">Trigonal Bipyramidal</option>
+        <option value="trigonalplanar">Trigonal Planar</option>
+      </select>
+      <script>
+        var type = document.getElementById("type").getAttribute('data-type');
+        document.getElementById('geometry').value = type;
+
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+
+        var light = new THREE.DirectionalLight( 'white' );
+        light.position.set( 0, 1, 1 ).normalize();
+        scene.add(light);
+
+        var backLight = new THREE.DirectionalLight( 'white' );
+        backLight.position.set( 0, 1, -10 ).normalize();
+        scene.add(backLight);
+
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        document.body.appendChild( renderer.domElement );
+        
+        var controls = new THREE.TrackballControls( camera, renderer.domElement );
+        controls.rotateSpeed = 0.5;
+        controls.minDistance = 1;
+        controls.maxDistance = 8;
+        
+        var r = 0.4, h = 0.6;
+
+        switch(type) {
+          case 'linear':
+            var s = new Linear(r, h);
+            scene.add(s.shape);
+            break;
+          case 'octahedral':
+            var s = new Octahedral(r, h, 0);
+            scene.add(s.shape);
+            break;
+          case 'pentagonalbipyramidal':
+            var s = new PentagonalBipyramidal(r, h, 0);
+            scene.add(s.shape);
+            break;
+          case 'tetrahedral':
+            var s = new Tetrahedral(r, h, 0);
+            scene.add(s.shape)
+            break;
+          case 'trigonalbipyramidal':
+            var s = new TrigonalBipyramidal(r, h, 0);
+            scene.add(s.shape);
+            break;
+          case 'trigonalplanar':
+            var s = new TrigonalPlanar(r, h, 0);
+            scene.add(s.shape);
+            break;
+        }
+
+        camera.position.z = 10;
+        var animate = function () {
+          requestAnimationFrame( animate );
+          controls.update();
+          renderer.render( scene, camera );
+        };
+        
+        animate();
+
+        document.getElementById("geometry").addEventListener('change', function() {
+          var type = this.options[this.selectedIndex].value;
+          window.location.href = "/geometry/" + type;
+        });
+      </script>  
+    </main>
+  </body>
+</html>
