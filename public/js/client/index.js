@@ -22,8 +22,11 @@ const appendNewTopic = function(topic) {
     link.setAttribute('href', topicsLink[topic.topic_id]);
     link.innerHTML = topic.topic_name;
     newTopicItem.appendChild(link);
-    head3.appendChild(newTopicItem)
+    head3.appendChild(newTopicItem);
+    const p = document.createElement('p');
+    p.innerHTML = topic.description;
     topicsList.appendChild(head3);
+    topicsList.appendChild(p);
 }
 
 const topicsRequest = new XMLHttpRequest();
