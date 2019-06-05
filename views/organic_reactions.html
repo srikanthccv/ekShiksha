@@ -23,7 +23,14 @@
     <script src="/js/client/organic_reactions.js"></script>
   </head>
   <body>
+    <span id="type" data-type="{{ type }}"></span>
+    <select id="reaction">
+      <option value="sn1">SN1</option>
+      <option value="sn2">SN2</option>
+    </select>
     <script>
+      var type = document.getElementById("type").getAttribute('data-type');
+      document.getElementById('reaction').value = type;
       var scene = new THREE.Scene();
       var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
@@ -53,8 +60,16 @@
 
 
       camera.position.z = 6;
-      // camera.position.x = 6;
-      showSN2();
+
+      switch (type) {
+        case 'sn1':
+          showSN1();
+          break;
+        case 'sn2':
+          showSN2();
+          break;
+      }
+
       var animate = function () {
         requestAnimationFrame( animate );
         controls.update();
@@ -62,6 +77,11 @@
       };
       
       animate();
+
+      document.getElementById("reaction").addEventListener('change', function() {
+        var type = this.options[this.selectedIndex].value;
+        window.location.href = "/organic-reactions/" + type;
+      });
     </script>
   </body>
 </html>
