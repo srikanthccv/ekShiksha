@@ -57,7 +57,7 @@
         var controls = new THREE.TrackballControls( camera, renderer.domElement );
         controls.rotateSpeed = 0.5;
         controls.minDistance = 1;
-        controls.maxDistance = 8;
+        controls.maxDistance = 20;
         
         var edgeLength = 2, nodeRadius = 0.6;
 
@@ -92,7 +92,7 @@
             break;
         }
 
-        camera.position.z = 10;
+        camera.position.z = 12;
         var animate = function () {
           requestAnimationFrame( animate );
           controls.update();
