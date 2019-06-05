@@ -1,11 +1,11 @@
 const topicsList = document.getElementById('topics');
 const topicsLink = {
     1 : "/periodic-table",
-    2 : "/geometry",
-    3 : "/solid-state",
-    4 : "/chemical-reactions",
-    5 : "/hybridization",
-    6 : "/organic-reactions",
+    2 : "/geometry/linear",
+    3 : "/solid-state/cubic",
+    4 : "/chemical-reactions/combination",
+    5 : "/hybridization/sp",
+    6 : "/organic-reactions/sn1",
 };
 
 const getTopicsListener = function() {
