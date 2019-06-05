@@ -68,8 +68,9 @@ app.get('/', function(request, response) {
     response.render('index');
 });
 
-app.get('/organic-reactions', function(request, response) {
-    response.render('organic_reactions');
+app.get('/organic-reactions/:type', function(request, response) {
+    let type = request.params.type;
+    response.render('organic_reactions', {type: type});
 });
 
 app.get('/hybridization/:type', function(request, response) {
