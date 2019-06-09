@@ -2,17 +2,31 @@
 <html lang="en">
   <head>
     <title>Solid State - Lattice Structures</title>
-    <meta name="description" content="A cool thing made with Glitch">
-    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A cool thing made with Glitch" />
+    <link
+      id="favicon"
+      rel="icon"
+      href="https://glitch.com/edit/favicon-app.ico"
+      type="image/x-icon"
+    />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <style>
-      body,html{height:100%}body{background-color:#000;margin:0;font-family:Helvetica,sans-serif;overflow:hidden}
+      body,
+      html {
+        height: 100%;
+      }
+      body {
+        background-color: #000;
+        margin: 0;
+        font-family: Helvetica, sans-serif;
+        overflow: hidden;
+      }
     </style>
 
-    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/main.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/104/three.min.js"></script>
     <script src="/js/lib/tween.min.js"></script>
     <script src="/js/lib/TrackballControls.js"></script>
@@ -35,77 +49,84 @@
         <option value="triclinic">Triclinic</option>
       </select>
       <script>
-        var type = document.getElementById("type").getAttribute('data-type');
-        document.getElementById('lattice').value = type;
+        var type = document.getElementById("type").getAttribute("data-type");
+        document.getElementById("lattice").value = type;
 
         var scene = new THREE.Scene();
-        var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+        var camera = new THREE.PerspectiveCamera(
+          75,
+          window.innerWidth / window.innerHeight,
+          0.1,
+          1000
+        );
 
-
-        var light = new THREE.DirectionalLight( 'white' );
-        light.position.set( 0, 1, 1 ).normalize();
+        var light = new THREE.DirectionalLight("white");
+        light.position.set(0, 1, 1).normalize();
         scene.add(light);
 
-        var backLight = new THREE.DirectionalLight( 'white' );
-        backLight.position.set( 0, 1, -10 ).normalize();
+        var backLight = new THREE.DirectionalLight("white");
+        backLight.position.set(0, 1, -10).normalize();
         scene.add(backLight);
 
         var renderer = new THREE.WebGLRenderer();
-        renderer.setSize( window.innerWidth, window.innerHeight );
-        document.body.appendChild( renderer.domElement );
-        
-        var controls = new THREE.TrackballControls( camera, renderer.domElement );
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        var controls = new THREE.TrackballControls(camera, renderer.domElement);
         controls.rotateSpeed = 0.5;
         controls.minDistance = 1;
         controls.maxDistance = 20;
-        
-        var edgeLength = 2, nodeRadius = 0.6;
 
-        switch(type) {
-          case 'cubic':
+        var edgeLength = 2,
+          nodeRadius = 0.6;
+
+        switch (type) {
+          case "cubic":
             var s = new Cubic(edgeLength, nodeRadius);
             scene.add(s.shape);
             break;
-          case 'hexagonal':
+          case "hexagonal":
             var s = new Hexagonal(edgeLength, nodeRadius);
             scene.add(s.shape);
             break;
-          case 'monoclinic':
+          case "monoclinic":
             var s = new Monoclinic(edgeLength, nodeRadius);
             scene.add(s.shape);
             break;
-          case 'orthorhombic':
+          case "orthorhombic":
             var s = new Orthorhombic(edgeLength, nodeRadius);
-            scene.add(s.shape)
+            scene.add(s.shape);
             break;
-          case 'tetragonal':
+          case "tetragonal":
             var s = new Tetragonal(edgeLength, nodeRadius);
             scene.add(s.shape);
             break;
-          case 'rhombohedral':
+          case "rhombohedral":
             var s = new Rhombohedral(edgeLength, nodeRadius);
             scene.add(s.shape);
             break;
-          case 'triclinic':
+          case "triclinic":
             var s = new Triclinic(edgeLength, nodeRadius);
             scene.add(s.shape);
             break;
         }
 
         camera.position.z = 12;
-        var animate = function () {
-          requestAnimationFrame( animate );
+        var animate = function() {
+          requestAnimationFrame(animate);
           controls.update();
-          renderer.render( scene, camera );
+          renderer.render(scene, camera);
         };
-        
+
         animate();
 
-        document.getElementById("lattice").addEventListener('change', function() {
-          var type = this.options[this.selectedIndex].value;
-          window.location.href = "/solid-state/" + type;
-        });
-      </script>  
+        document
+          .getElementById("lattice")
+          .addEventListener("change", function() {
+            var type = this.options[this.selectedIndex].value;
+            window.location.href = "/solid-state/" + type;
+          });
+      </script>
     </main>
   </body>
 </html>
