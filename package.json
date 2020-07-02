@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "sqlite3": "^4.0.9",
+    "sqlite3": "^5.0.0",
     "swig": "^1.4.2"
   },
   "engines": {
