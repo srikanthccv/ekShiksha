@@ -1,2 +1,2 @@
 # URL
-https://ekshiksha.glitch.me/
+https://ekshiksha.glitch.me
